@@ -13,14 +13,14 @@ public class CandidateValidator implements Predicate<Candidate> {
     public boolean test(Candidate candidate) {
         return candidate.getAge() >= MIN_AGE
                 && candidate.isAllowedToVote()
-                && candidate.getNationality().equalsIgnoreCase(UKR_NATIONALITY)
+                && candidate.getNationality().equals(UKR_NATIONALITY)
                 && getPeriodInUkr(candidate.getPeriodsInUkr()) >= MIN_PERIOD;
     }
 
     private int getPeriodInUkr(String stringPeriod) {
-        String[] arrPeriod = stringPeriod.split(HYPHEN);
-        int from = Integer.parseInt(arrPeriod[0]);
-        int to = Integer.parseInt(arrPeriod[1]);
+        String[] arrPeriod = stringPeriod.trim().split(HYPHEN);
+        int from = Integer.parseInt(arrPeriod[0].trim());
+        int to = Integer.parseInt(arrPeriod[1].trim());
 
         return to - from;
     }
